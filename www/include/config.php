@@ -171,7 +171,7 @@
 
 	# Feature flags
 
-	$GLOBALS['cfg']['enable_feature_signup'] = 0;
+	$GLOBALS['cfg']['enable_feature_signup'] = 1;
 	$GLOBALS['cfg']['enable_feature_signin'] = 1;
 	$GLOBALS['cfg']['enable_feature_persistent_login'] = 1;
 	$GLOBALS['cfg']['enable_feature_account_delete'] = 0;
