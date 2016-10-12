@@ -51,6 +51,7 @@
 
 	$GLOBALS['cfg']['server_scheme'] = (isset($_SERVER['HTTPS']) && ($_SERVER['HTTPS'] == 'on')) ? 'https' : 'http';
 	$GLOBALS['cfg']['server_name'] = isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : 'fake.com';
+	$GLOBALS['cfg']['server_force_https'] = 0;	# for example, when you're running a Flamework app on port 80 behind a proxy on port 443; it happens...
 
 	$GLOBALS['cfg']['abs_root_url']		= "{$GLOBALS['cfg']['server_scheme']}://{$GLOBALS['cfg']['server_name']}/";
 	$GLOBALS['cfg']['safe_abs_root_url']	= $GLOBALS['cfg']['abs_root_url'];
@@ -85,7 +86,7 @@
         $GLOBALS['cfg']['enable_feature_cache_prefixes'] = 1;
         $GLOBALS['cfg']['cache_prefix'] = $GLOBALS['cfg']['environment'];
 
-	# Note: memcache stuff is not enabled by default but is 
+	# Note: memcache stuff is not enabled by default but is
 	# available in the 'extras' directory
 
 	$GLOBALS['cfg']['auth_cookie_domain'] = parse_url($GLOBALS['cfg']['abs_root_url'], 1);
@@ -158,7 +159,7 @@
 	# This will assign $pagination automatically for Smarty but
 	# you probably don't want to do this for anything resembling
 	# a complex application...
-	
+
 	$GLOBALS['cfg']['pagination_assign_smarty_variable'] = 0;
 
 	$GLOBALS['cfg']['pagination_per_page'] = 10;
@@ -193,7 +194,7 @@
 
 	# THINGS YOU SHOULD DEFINE IN YOUR secrets.php FILE WHICH IS NOT
 	# MEANT TO BE CHECKED IN EVER. DON'T DO IT. AND DON'T DEFINE THESE
-	# THINGS HERE. REALLY. 
+	# THINGS HERE. REALLY.
 
 	# $GLOBALS['cfg']['crypto_cookie_secret'] = '';
 	# $GLOBALS['cfg']['crypto_password_secret'] = '';
