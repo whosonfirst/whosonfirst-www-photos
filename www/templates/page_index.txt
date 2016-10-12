@@ -1,0 +1,9 @@
+{include file='inc_head.txt' nav_tab='home'}
+
+<div class="container">
+  <div class="hero-unit">
+
+</div>
+</div>
+
+{include file='inc_foot.txt'}
