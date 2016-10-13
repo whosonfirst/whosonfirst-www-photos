@@ -35,13 +35,7 @@
 			$GLOBALS['cfg']['api_server_name'] = $GLOBALS['cfg']['api_subdomain'] . $GLOBALS['cfg']['api_server_name'];
 		}
 
-		# Build the 'api_abs_root_url' based on everything above
-
-		if ($GLOBALS['cfg']['abs_root_suffix']){
-			$GLOBALS['cfg']['api_abs_root_url'] = $GLOBALS['cfg']['api_abs_root_url'] . $GLOBALS['cfg']['abs_root_suffix'] . "/";
-		}
-
-		$GLOBALS['cfg']['api_abs_root_url'] = "{$GLOBALS['cfg']['api_server_scheme']}://{$GLOBALS['cfg']['api_server_name']}" . "/";
+		$GLOBALS['cfg']['api_abs_root_url'] = $GLOBALS['cfg']['abs_root_url'];
 
 		# If I have an API specific subdomain/prefix then check to see if I am already
 		# running on that host; if I am then update the 'site_abs_root_url' config and
@@ -349,7 +343,7 @@
 		$GLOBALS['smarty']->assign_by_ref("site_token", $token['access_token']);
 
 		$end = microtime_ms();
-		$time = $end - $start; 
+		$time = $end - $start;
 
 		$GLOBALS['timing_keys']['user_init'] = 'WWW setup';
 		$GLOBALS['timings']['user_init_count'] = 1;
