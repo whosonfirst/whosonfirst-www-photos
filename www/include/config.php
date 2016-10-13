@@ -19,15 +19,15 @@
 
 	$GLOBALS['cfg']['db_main'] = array(
 		'host'	=> 'localhost',
-		'name'	=> 'flamework',		# database name
-		'user'	=> 'flamework',		# database username
+		'name'	=> 'wof_photos',		# database name
+		'user'	=> 'wof_photos',		# database username
 		'auto_connect' => 0,
 	);
 
 	$GLOBALS['cfg']['db_accounts'] = array(
 		'host'	=> 'localhost',
-		'name'	=> 'flamework',		# database name
-		'user'	=> 'root',		# database username
+		'name'	=> 'wof_photos',		# database name
+		'user'	=> 'wof_photos',		# database username
 		'auto_connect' => 0,
 	);
 

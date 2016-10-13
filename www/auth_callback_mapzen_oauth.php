@@ -109,7 +109,7 @@
 
 		# we don't get back a numeric ID yet
 		# https://github.com/mapzen/operations-engineering/issues/229
-		
+
 		$mapzen_id = $mapzen_data['id'];
 		$mapzen_user = mapzen_users_get_by_mapzen_id($mapzen_id);
 
@@ -131,7 +131,7 @@
 			$GLOBALS['smarty']->display("page_auth_callback_mapzen_oauth.txt");
 			exit();
 		}
-		
+
 		if ($mapzen_user['oauth_token'] != $oauth_token){
 
 			$update = array('oauth_token' => $oauth_token);
