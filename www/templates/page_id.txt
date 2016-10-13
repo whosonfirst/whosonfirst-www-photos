@@ -15,7 +15,7 @@
 	</div>
 	<h3 class="headroom">Available photo sources</h3>
 	<ul>
-		<li><a href="{$cfg.abs_root_url}/id/{$wof_id|@escape}/flickr">Flickr photos</a></li>
+		<li><a href="{$cfg.abs_root_url}id/{$wof_id|@escape}/flickr">Flickr photos</a></li>
 	</ul>
 </div>
 
