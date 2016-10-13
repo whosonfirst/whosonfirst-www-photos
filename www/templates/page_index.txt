@@ -5,7 +5,7 @@
 		<h1>WOF Photos</h1>
 	</div>
 	<ul>
-		<li><a href="/id/85977539/photos">New York City Photos</a></li>
+		<li><a href="{$cfg.abs_root_url}id/85977539">New York City Photos</a></li>
 	</ul>
 </div>
 

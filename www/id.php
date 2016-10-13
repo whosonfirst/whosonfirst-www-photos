@@ -46,5 +46,5 @@
 		$GLOBALS['smarty']->assign('primary_photo_src', $photo['src']);
 	}
 
-	$GLOBALS['smarty']->display('page_photos.txt');
+	$GLOBALS['smarty']->display('page_id.txt');
 	exit();
