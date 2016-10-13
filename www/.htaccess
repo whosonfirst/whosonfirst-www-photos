@@ -67,10 +67,11 @@ RewriteRule  ^account/?$		account.php		[L]
 
 # General pages
 
-RewriteRule ^about/?$			about.php 		[L,QSA]
-RewriteRule ^contact/?$			contact.php 		[L,QSA]
+RewriteRule ^about/?$                   about.php               [L,QSA]
+RewriteRule ^contact/?$                 contact.php             [L,QSA]
 
-RewriteRule ^id/(\d+)$    id.php?id=$1   [L,QSA]
+#RewriteRule ^id/(\d+)$                  id.php?id=$1            [L,QSA]
+RewriteRule ^id/(\d+)/flickr$           flickr.php?id=$1        [L,QSA]
 
 # See all this stuff that's been commented out? It's a lot of hoop-jumping
 # to separate API calls (api.example.com/rest) from all the other user-level
