@@ -3,7 +3,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Company {$smarty.now|date_format:"%Y"}</p>
+        <p>This is a <a href="https://mapzen.com/">Mapzen</a> gig</p>
       </footer>
 
 {if "staff"|@auth_has_role}
@@ -12,7 +12,11 @@
 
     </div> <!-- /container -->
 
-    {pagination_footer}
+	{pagination_footer}
+
+	<script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.photos.utils.js"></script>
+	<script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.photos.api.js"></script>
+	<script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.photos.app.js"></script>
 
   </body>
 </html>

@@ -3,7 +3,7 @@
 
 	# Things you may want to change in a hurry
 
-	$GLOBALS['cfg']['site_name'] = 'flamework';
+	$GLOBALS['cfg']['site_name'] = 'Photos';
 	$GLOBALS['cfg']['environment'] = 'dev';
 
 	$GLOBALS['cfg']['site_disabled'] = 0;
@@ -168,6 +168,10 @@
 
 	$GLOBALS['cfg']['pagination_keyboard_shortcuts'] = 1;
 	$GLOBALS['cfg']['pagination_touch_shortcuts'] = 1;
+
+	// Put this in your secrets/local config
+	$GLOBALS['cfg']['flickr_api_key'] = '';
+	$GLOBALS['cfg']['flickr_api_secret'] = '';
 
 	# Feature flags
 

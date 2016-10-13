@@ -1,0 +1,20 @@
+.wof-photo {
+	display: inline-block;
+	margin: 10px 10px 10px 0;
+	width: calc(33% - 20px);
+	cursor: pointer;
+	background: #ccc;
+}
+
+.wof-photo:nth-child(3n) {
+	margin-right: 0;
+}
+
+.wof-photo img {
+	width: 100%;
+	height: auto;
+}
+
+.wof-photo-primary {
+	outline: 3px solid #d4645c;
+}
