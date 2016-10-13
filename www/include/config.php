@@ -169,9 +169,127 @@
 	$GLOBALS['cfg']['pagination_keyboard_shortcuts'] = 1;
 	$GLOBALS['cfg']['pagination_touch_shortcuts'] = 1;
 
-	// Put this in your secrets/local config
-	$GLOBALS['cfg']['flickr_api_key'] = '';
-	$GLOBALS['cfg']['flickr_api_secret'] = '';
+	// Debugging
+	$GLOBALS['cfg']['dbug_log'] = '/var/log/wof_photos.log';
+
+	// Flickr
+
+	$GLOBALS['cfg']['flickr_api_key'] = 'DEFINE IN SECRETS';
+	$GLOBALS['cfg']['flickr_api_secret'] = 'DEFINE IN SECRETS';
+
+	# API methods and "blessings" are defined at the bottom
+
+	# API feature flags
+
+	$GLOBALS['cfg']['enable_feature_api'] = 1;
+
+	$GLOBALS['cfg']['enable_feature_api_documentation'] = 1;
+	$GLOBALS['cfg']['enable_feature_api_explorer'] = 1;
+	$GLOBALS['cfg']['enable_feature_api_logging'] = 1;
+	$GLOBALS['cfg']['enable_feature_api_throttling'] = 0;
+
+	$GLOBALS['cfg']['enable_feature_api_require_keys'] = 0;		# because oauth2...
+	$GLOBALS['cfg']['enable_feature_api_register_keys'] = 1;
+
+	$GLOBALS['cfg']['enable_feature_api_delegated_auth'] = 1;
+	$GLOBALS['cfg']['enable_feature_api_authenticate_self'] = 1;
+
+	# API URLs and endpoints
+
+	$GLOBALS['cfg']['api_abs_root_url'] = '';	# leave blank - set in api_config_init()
+	$GLOBALS['cfg']['site_abs_root_url'] = '';	# leave blank - set in api_config_init()
+
+	$GLOBALS['cfg']['api_subdomain'] = '';
+	$GLOBALS['cfg']['api_endpoint'] = 'api/rest/';
+
+	$GLOBALS['cfg']['api_require_ssl'] = 1;
+
+	$GLOBALS['cfg']['api_auth_type'] = 'oauth2';
+	$GLOBALS['cfg']['api_oauth2_require_authentication_header'] = 0;
+	$GLOBALS['cfg']['api_oauth2_allow_get_parameters'] = 1;
+
+	# API site keys (TTL is measured in seconds)
+
+	$GLOBALS['cfg']['enable_feature_api_site_keys'] = 1;
+	$GLOBALS['cfg']['enable_feature_api_site_tokens'] = 1;
+
+	$GLOBALS['cfg']['api_site_keys_ttl'] = 28800;		# 8 hours
+	$GLOBALS['cfg']['api_site_tokens_ttl'] = 28000;		# 8 hours
+	$GLOBALS['cfg']['api_site_tokens_user_ttl'] = 3600;	# 1 hour
+
+	$GLOBALS['cfg']['api_explorer_keys_ttl'] = 28800;		# 8 hours
+	$GLOBALS['cfg']['api_explorer_tokens_ttl'] = 28000;		# 8 hours
+	$GLOBALS['cfg']['api_explorer_tokens_user_ttl'] = 28000;	# 8 hours
+
+	# We test this in lib_api_auth_oauth2.php to see whether or
+	# not we need to throw an error - it's possible that we want
+	# this to be computed in lib_api_config for example but right
+	# now we're explicit about everything (20141114/straup)
+
+	$GLOBALS['cfg']['enable_feature_api_oauth2_tokens_null_users'] = 1;
+
+	# As in API key roles - see also: api_keys_roles_map()
+	# (20141114/straup)
+
+	$GLOBALS['cfg']['api_oauth2_tokens_null_users_allowed_roles'] = array(
+		'site',
+		'api_explorer',
+		'infrastructure',
+	);
+
+	$GLOBALS['cfg']['enable_feature_api_cors'] = 1;
+	$GLOBALS['cfg']['api_cors_allow_origin'] = '*';
+
+	# API pagination
+
+	$GLOBALS['cfg']['api_per_page_default'] = 100;
+	$GLOBALS['cfg']['api_per_page_max'] = 500;
+
+	# The actual API config
+
+	$GLOBALS['cfg']['api'] = array(
+
+		'formats' => array( 'json' ),
+		'default_format' => 'json',
+
+		# We're defining methods using the method_definitions
+		# hooks defined below to minimize the clutter in the
+		# main config file, aka this one (20130308/straup)
+		'methods' => array(),
+
+		# We are NOT doing the same for blessed API keys since
+		# it's expected that their number will be small and
+		# manageable (20130308/straup)
+
+		'blessings' => array(
+			'xxx-apikey' => array(
+				'hosts' => array('127.0.0.1'),
+				# 'tokens' => array(),
+				# 'environments' => array(),
+				'methods' => array(
+					'foo.bar.baz' => array(
+						'environments' => array('sd-931')
+					)
+				),
+				'method_classes' => array(
+					'foo.bar' => array(
+						# see above
+					)
+				),
+			),
+		),
+	);
+
+	# Load api methods defined in separate PHP files whose naming
+	# convention is FLAMEWORK_INCLUDE_DIR . "/config_api_{$definition}.php";
+	#
+	# IMPORTANT: This is syntactic sugar and helper code to keep the growing
+	# number of API methods out of the main config. Stuff is loaded in to
+	# memory in lib_api_config:api_config_init (20130308/straup)
+
+	$GLOBALS['cfg']['api_method_definitions'] = array(
+		'methods',
+	);
 
 	# Feature flags
 
@@ -193,6 +311,7 @@
 	$GLOBALS['cfg']['autoload_libs'] = array(
 		'users',
 		'cache',
+		'dbug',
 		#'cache_memcache',
 	);
 

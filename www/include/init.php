@@ -565,4 +565,57 @@
 
 	$GLOBALS['timings']['init_end'] = microtime_ms();
 
-	# the end
+	# the end of default flamwork stuff
+
+	# start of flamework-api stuff for API site keys
+
+	if ($this_is_webpage){
+
+		# we assume login_check_login has been called above already
+		# (20160121/thisisaaronland)
+
+		# API site key/token stuff
+
+		if (features_is_enabled("api")){
+
+			loadlib("api");
+
+			if (features_is_enabled(array("api_site_keys", "api_site_tokens"))){
+
+				loadlib("api_keys");
+				loadlib("api_oauth2_access_tokens");
+
+				$token = api_oauth2_access_tokens_fetch_site_token($GLOBALS['cfg']['user']);
+				$GLOBALS['smarty']->assign_by_ref("site_token", $token['access_token']);
+			}
+		}
+
+		$root_url = parse_url($GLOBALS['cfg']['abs_root_url']);
+		$redirect = str_replace($root_url['path'], '', $_SERVER['REQUEST_URI']);
+		if ($redirect == ''){
+			$redirect = '/';
+		}
+		$redirect = urlencode($redirect);
+		$GLOBALS['signin_url'] = "{$GLOBALS['cfg']['abs_root_url']}signin/?redir=$redirect";
+		$GLOBALS['smarty']->assign("signin_url", $GLOBALS['signin_url']);
+
+		if ($GLOBALS['cfg']['user']) {
+
+			loadlib('users_settings');
+
+			$branches = array('master');
+			foreach (glob("{$GLOBALS['cfg']['wof_pending_dir']}*") as $b) {
+				if (is_dir($b) &&
+				    ! in_array(basename($b), $branches)) {
+					$branches[] = basename($b);
+				}
+			}
+			$curr_branch = users_settings_get_single($GLOBALS['cfg']['user'], 'branch');
+			$show_git_branch = users_settings_get_single($GLOBALS['cfg']['user'], 'show_git_branch');
+			$GLOBALS['smarty']->assign("branches", $branches);
+			$GLOBALS['smarty']->assign("show_git_branch", $show_git_branch);
+			$GLOBALS['smarty']->assign("curr_branch", $curr_branch);
+		}
+	}
+
+	# end of flamework-api stuff for API site keys

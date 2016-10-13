@@ -6,7 +6,7 @@ mapzen.whosonfirst.photos = mapzen.whosonfirst.photos || {};
 // that decision may change some day but not today
 // (20160121/thisisaaronland)
 
-mapzen.whosonfirst.photos.app = (function() {
+mapzen.whosonfirst.photos.edit = (function() {
 
 	var self = {
 
@@ -36,15 +36,11 @@ mapzen.whosonfirst.photos.app = (function() {
 		},
 
 		mark_photos: function(wof_id){
-			self.load_photos(wof_id, function(rsp){
-				if (! rsp.photos || rsp.photos.length == 0){
-					return;
-				}
-				var photo = rsp.photos[0];
-				if (photo.type == 'flickr'){
-					$('#wof-photo-flickr-' + photo.info.id).addClass('wof-photo-primary');
-				}
-			});
+			$photo = $('#primary-photo');
+			if ($photo){
+				var id = $photo.data('photo-id');
+				$('#wof-photo-flickr-' + id).addClass('wof-photo-primary');
+			}
 		},
 
 		load_photos: function(wof_id, onsuccess){
@@ -98,5 +94,5 @@ mapzen.whosonfirst.photos.app = (function() {
 })();
 
 $(document).ready(function(){
-	mapzen.whosonfirst.photos.app.init();
+	mapzen.whosonfirst.photos.edit.init();
 });

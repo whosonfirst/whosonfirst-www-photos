@@ -1,5 +1,6 @@
 <?php
 
+	loadlib("wof_s3");
 	loadlib("flickr_api");
 	loadlib("slack_bot");
 	loadlib("users");
@@ -29,9 +30,9 @@
 		extract($photo);
 		return "https://farm{$farm}.staticflickr.com/{$server}/{$id}_{$secret}_{$size}.jpg";
 	}
-	
+
 	########################################################################
-	
+
 	function wof_photos_assign_flickr_photo($wof_id, $flickr_id){
 
 		if (! $GLOBALS['cfg']['user']['id'] ||
@@ -64,25 +65,19 @@
 
 		// For now we only do one primary photo
 		$rsp = db_write("
-			DELETE FROM boundaryissues_photos
+			DELETE FROM photos
 			WHERE wof_id = $esc_wof_id
 		");
 		if (! $rsp['ok']){
 			return $rsp;
 		}
 
-		// Schedule an offline index of the new record
-		$rsp = offline_tasks_schedule_task('save_photo', array(
-			'wof_id' => $wof_id,
-			'type' => $type,
-			'info_json' => $info_json,
-			'user_id' => $GLOBALS['cfg']['user']['id']
-		));
-		if (! $rsp['ok']) {
+		$rsp = wof_photos_save($wof_id, $type, $info_json, $esc_user_id);
+		if (! $rsp['ok']){
 			return $rsp;
 		}
 
-		$rsp = db_insert('boundaryissues_photos', array(
+		$rsp = db_insert('photos', array(
 			'wof_id' => $esc_wof_id,
 			'user_id' => $esc_user_id,
 			'type' => $type,
@@ -99,7 +94,7 @@
 		$esc_wof_id = intval($wof_id);
 		$rsp = db_fetch("
 			SELECT *
-			FROM boundaryissues_photos
+			FROM photos
 			WHERE wof_id = $esc_wof_id
 			ORDER BY sort
 		");
@@ -131,11 +126,6 @@
 		$dir = "photos/$reldir";
 		$info = json_decode($info_json, 'as hash');
 
-		$path = wof_utils_find_id($wof_id);
-		$geojson = file_get_contents($path);
-		$feature = json_decode($geojson, 'as hash');
-		$props = $feature['properties'];
-
 		if ($type == 'flickr'){
 			$dir .= '/flickr';
 			$basename = "{$wof_id}_flickr_{$info['photo']['id']}";
@@ -163,13 +153,13 @@
 		$photo_name = basename($photo_url);
 		$user = users_get_by_id($user_id);
 		$username = $user['username'];
-		
-		$rsp = slack_bot_msg("`$wof_id` $username saved photo for {$props['wof:name']}: $photo_url");
+
+		//$rsp = slack_bot_msg("`$wof_id` $username saved photo for {$props['wof:name']}: $photo_url");
 		return $rsp;
 	}
 
 	########################################################################
-	
+
 	function wof_photos_src($photo){
 
 		$wof_id = $photo['wof_id'];

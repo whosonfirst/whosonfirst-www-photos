@@ -42,6 +42,7 @@
 	$rsp = wof_photos_get($wof_id);
 	if (! empty($rsp['photos'])){
 		$photo = $rsp['photos'][0];
+		$GLOBALS['smarty']->assign('primary_photo_id', $photo['info']['id']);
 		$GLOBALS['smarty']->assign('primary_photo_src', $photo['src']);
 	}
 

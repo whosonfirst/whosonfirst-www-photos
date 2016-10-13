@@ -16,7 +16,7 @@
 
 	<script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.photos.utils.js"></script>
 	<script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.photos.api.js"></script>
-	<script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.photos.app.js"></script>
+	<script src="{$cfg.abs_root_url}javascript/mapzen.whosonfirst.photos.edit.js"></script>
 
   </body>
 </html>
