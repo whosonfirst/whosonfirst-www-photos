@@ -6,3 +6,4 @@ www/include/secrets*.php
 tests/coverage.state
 coverage/
 certified
+www/templates_c
