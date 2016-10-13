@@ -1,0 +1,22 @@
+{capture assign="page_title"}{$wof_name} ({$wof_id}){/capture}
+{include file='inc_head.txt' nav_tab='edit'}
+
+<div class="container">
+	<div class="row">
+		<h2>Photos of <span id="wof_name">{$wof_name|@escape}</span></h2>
+	</div>
+	<div id="primary-photo-container" class="row headroom">
+		{if $primary_photo_src}
+			<h3>Primary photo</h3>
+			<img src="{$primary_photo_src|@escape}" alt="" id="primary-photo" class="wof-photo-primary" data-photo-id="{$primary_photo_id|@escape}">
+		{else}
+			(No photo selected yet)
+		{/if}
+	</div>
+	<h3 class="headroom">Available photo sources</h3>
+	<ul>
+		<li><a href="{$cfg.abs_root}/id/{$wof_id|@escape}/flickr">Flickr photos</a></li>
+	</ul>
+</div>
+
+{include file='inc_foot.txt'}

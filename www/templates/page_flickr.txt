@@ -4,7 +4,6 @@
 <div class="container">
 	<div class="row">
 		<h2>Photos of <span id="wof_name">{$wof_name|@escape}</span></h2>
-		<p><a href="{$cfg.abs_root}/id/{$wof_id|@escape}">Back to WOF editor</a></p>
 	</div>
 	<div id="primary-photo-container" class="row headroom">
 		{if $primary_photo_src}
