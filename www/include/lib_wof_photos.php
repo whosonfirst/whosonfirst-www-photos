@@ -132,7 +132,7 @@
 
 		$photo_url = $rsp['url'];
 		$photo_name = basename($photo_url);
-		$user = users_get_by_id($user_id);
+		$user = users_get_by_id($GLOBALS['cfg']['user']['id']);
 		$username = $user['username'];
 
 		$path = wof_utils_id2relpath($wof_id);
