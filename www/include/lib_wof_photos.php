@@ -134,8 +134,18 @@
 		$photo_name = basename($photo_url);
 		$user = users_get_by_id($user_id);
 		$username = $user['username'];
-		// something something get wof:name
-		//$rsp = slack_bot_msg("`$wof_id` $username saved photo for {$props['wof:name']}: $photo_url");
+
+		$path = wof_utils_id2relpath($wof_id);
+		$url = "https://whosonfirst.mapzen.com/data/$path";
+		$rsp = http_get($url);
+		if (! $rsp['ok']){
+			return $rsp;
+		}
+
+		$geojson = $rsp['body'];
+		$feature = json_decode($geojson, 'as hash');
+		$props = $feature['properties'];
+		$rsp = slack_bot_msg("`$wof_id` $username saved photo for {$props['wof:name']}: $photo_url");
 
 		$esc_user_id = intval($GLOBALS['cfg']['user']['id']);
 		$esc_type = addslashes($type);
