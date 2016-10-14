@@ -15,7 +15,7 @@
 			{if $wk_page}
 				<p class="caveat">Click on an image to save it. Those <strong>outlined in red</strong> are already saved.</p>
 				{foreach from=$wikipedia_photos item=photo}
-					<figure class="wof-photo{if in_array($photo.ext_id,$photos_saved)} wof-photo-saved{/if}" data-type="wikipedia" data-ext-id="{$photo.ext_id}">
+					<figure class="wof-thumb wof-save-target{if in_array($photo.ext_id,$photos_saved)} wof-saved{/if}" data-type="wikipedia" data-ext-id="{$photo.ext_id}">
 						<img src="{$photo.info|@wof_photos_wikipedia_src|@escape}" alt="">
 					</figure>
 				{/foreach}

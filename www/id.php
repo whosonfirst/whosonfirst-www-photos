@@ -28,9 +28,9 @@
 
 	$rsp = wof_photos_get($wof_id);
 	if (! empty($rsp['photos'])){
-		$photo = $rsp['photos'][0];
-		$GLOBALS['smarty']->assign('primary_photo_id', $photo['info']['id']);
-		$GLOBALS['smarty']->assign('primary_photo_src', $photo['src']);
+		$photos = $rsp['photos'];
+		$GLOBALS['smarty']->assign('primary_photo', array_shift($photos));
+		$GLOBALS['smarty']->assign('secondary_photos', $photos);
 	}
 
 	$GLOBALS['smarty']->display('page_id.txt');

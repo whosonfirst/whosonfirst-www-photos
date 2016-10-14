@@ -163,11 +163,16 @@
 		$type = $photo['type'];
 		$ext_id = $photo['ext_id'];
 
+		$info = $photo['info'];
+		$ext_filename = $ext_id;
+		if ($info['ext_filename']){
+			$ext_filename = $info['ext_filename'];
+		}
 
 		$relpath = wof_utils_id2relpath($wof_id);
 		$reldir = dirname($relpath);
 		$base_url = "https://whosonfirst.mapzen.com/photos/$reldir";
-		$filename = "{$wof_id}_{$type}_{$ext_id}.jpg";
+		$filename = "{$wof_id}_{$type}_{$ext_filename}.jpg";
 
 		return "$base_url/{$type}/$filename";
 	}

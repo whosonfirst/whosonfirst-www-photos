@@ -5,19 +5,26 @@
 	<div class="row">
 		<h2>Photos of <span id="wof_name">{$wof_name|@escape}</span></h2>
 	</div>
-	<div id="primary-photo-container" class="row headroom">
-		{if $primary_photo_src}
-			<h3>Primary photo</h3>
-			<img src="{$primary_photo_src|@escape}" alt="" id="primary-photo" class="wof-photo-primary" data-photo-id="{$primary_photo_id|@escape}">
-		{else}
-			(No photo selected yet)
-		{/if}
-	</div>
-	<h3 class="headroom">Available photo sources</h3>
+	<h3>Available photo sources</h3>
 	<ul>
 		<li><a href="{$cfg.abs_root_url}id/{$wof_id|@escape}/flickr/">Flickr photos</a></li>
 		<li><a href="{$cfg.abs_root_url}id/{$wof_id|@escape}/wikipedia/">Wikipedia photos</a></li>
 	</ul>
+	<div id="primary-photo-container" class="row headroom">
+		{if $primary_photo}
+			<img src="{$primary_photo.src|@escape}" alt="" id="primary-photo" class="wof-photo-primary" data-type="{$primary_photo.type|@escape}" data-ext-id="{$primary_photo.ext_id|@escape}">
+		{else}
+			(No photos saved yet)
+		{/if}
+	</div>
+	<div class="row headroom">
+		{foreach from=$secondary_photos item=photo}
+			<figure class="wof-thumb" data-type="{$photo.type|@escape}" data-ext-id="{$photo.ext_id|@escape}">
+				<img src="{$photo.src|@escape}" alt="">
+			</figure>
+		{/foreach}
+	</div>
+
 </div>
 
 {include file='inc_foot.txt'}

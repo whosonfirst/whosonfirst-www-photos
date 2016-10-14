@@ -15,7 +15,7 @@
 			{if $woe_id}
 				<p class="caveat">Click on an image to save it. Those <strong>outlined in red</strong> are already saved.</p>
 				{foreach from=$flickr_photos item=photo}
-					<figure class="wof-photo{if in_array($photo.ext_id,$photos_saved)} wof-photo-saved{/if}" data-type="flickr" data-ext-id="{$photo.id}">
+					<figure class="wof-thumb wof-save-target{if in_array($photo.ext_id,$photos_saved)} wof-saved{/if}" data-type="flickr" data-ext-id="{$photo.id}">
 						<img src="{$photo|@wof_photos_flickr_src|@escape}" alt="">
 					</figure>
 				{/foreach}

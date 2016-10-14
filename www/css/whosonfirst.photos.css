@@ -1,20 +1,23 @@
-.wof-photo {
+.wof-save-target {
+	cursor: pointer;
+}
+
+.wof-thumb {
 	display: inline-block;
 	margin: 10px 10px 10px 0;
 	width: calc(33% - 20px);
-	cursor: pointer;
 	background: #ccc;
 }
 
-.wof-photo:nth-child(3n) {
+.wof-thumb:nth-child(3n) {
 	margin-right: 0;
 }
 
-.wof-photo img {
+.wof-thumb img {
 	width: 100%;
 	height: auto;
 }
 
-.wof-photo-saved {
+.wof-saved {
 	outline: 5px solid #d4645c;
 }

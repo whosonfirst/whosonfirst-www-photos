@@ -11,7 +11,7 @@ mapzen.whosonfirst.photos.edit = (function() {
 	var self = {
 
 		init: function(){
-			$('.wof-photo img').click(function(e){
+			$('.wof-save-target img').click(function(e){
 				self.photo_save(e.target);
 			});
 		},
@@ -20,7 +20,7 @@ mapzen.whosonfirst.photos.edit = (function() {
 			var $figure = $(el).closest('figure');
 
 			var onsuccess = function(){
-				$figure.addClass('wof-photo-saved');
+				$figure.addClass('wof-saved');
 			};
 
 			var onerror = function(){
