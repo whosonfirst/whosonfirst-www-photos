@@ -46,6 +46,8 @@
 		),
 	);
 
+	$GLOBALS['cfg']['enable_feature_slack_bot'] = 0;
+	$GLOBALS['cfg']['slack_bot_webhook_url'] = 'ADD ME IN LOCAL CONFIG OR SECRETS';
 
 	# hard coding this URL will ensure it works in cron mode too
 
