@@ -4,8 +4,8 @@
 
 	$GLOBALS['cfg']['api']['methods'] = array_merge(array(
 
-		"wof.get_photos" => array (
-			"description" => "Finds a photo for a WOF record.",
+		"wof.photos_get" => array (
+			"description" => "Finds photos for a WOF record.",
 			"documented" => 1,
 			"enabled" => 1,
 			"library" => "api_wof",
@@ -13,11 +13,11 @@
 			"request_method" => "POST",
 			"parameters" => array(
 				array("name" => "wof_id", "description" => "The WOF ID.", "documented" => 1, "required" => 1),
-				array("name" => "flickr_id", "description" => "The Flickr photo ID.", "documented" => 1, "required" => 1)
+				array("name" => "type", "description" => "Optional source filter ('flickr', 'wikipedia', etc.)", "documented" => 1, "required" => 0)
 			)
 		),
 
-		"wof.assign_flickr_photo" => array (
+		"wof.photos_save" => array (
 			"description" => "Assigns a photo to a WOF record.",
 			"documented" => 1,
 			"enabled" => 1,
@@ -26,7 +26,8 @@
 			"request_method" => "POST",
 			"parameters" => array(
 				array("name" => "wof_id", "description" => "The WOF ID.", "documented" => 1, "required" => 1),
-				array("name" => "flickr_id", "description" => "The Flickr photo ID.", "documented" => 1, "required" => 1)
+				array("name" => "type", "description" => "The source type ('flickr', 'wikipedia', etc.)", "documented" => 1, "required" => 1),
+				array("name" => "ext_id", "description" => "The external source ID.", "documented" => 1, "required" => 1)
 			)
 		),
 

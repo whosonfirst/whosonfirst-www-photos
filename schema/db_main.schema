@@ -74,6 +74,7 @@ CREATE TABLE `photos` (
   `wof_id` bigint(20) DEFAULT NULL,
   `user_id` int(11) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
+  `ext_id` varchar(255) DEFAULT NULL,
   `info` text,
   `sort` int(11) DEFAULT NULL,
   `created` datetime DEFAULT NULL,

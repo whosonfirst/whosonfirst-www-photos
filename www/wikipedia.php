@@ -31,15 +31,15 @@
 	$GLOBALS['smarty']->assign('wof_id', $wof_id);
 	$GLOBALS['smarty']->assign('wof_name', $feature['properties']['wof:name']);
 
-	if ($concordances['gp:id']){
-		$rsp = wof_photos_flickr_search($concordances['gp:id']);
-		$GLOBALS['smarty']->assign('woe_id', $concordances['gp:id']);
+	if ($concordances['wk:page']){
+		$rsp = wof_photos_wikipedia_search($concordances['wk:page']);
+		$GLOBALS['smarty']->assign('wk_page', $concordances['wk:page']);
 		if ($rsp['ok']){
-			$GLOBALS['smarty']->assign_by_ref('flickr_photos', $rsp['photos']);
+			$GLOBALS['smarty']->assign_by_ref('wikipedia_photos', $rsp['photos']);
 		}
 	}
 
-	$rsp = wof_photos_get($wof_id, 'flickr');
+	$rsp = wof_photos_get($wof_id, 'wikipedia');
 	if (! empty($rsp['photos'])){
 		$ext_ids = array();
 		foreach ($rsp['photos'] as $photo){
@@ -48,5 +48,5 @@
 		$GLOBALS['smarty']->assign('photos_saved', $ext_ids);
 	}
 
-	$GLOBALS['smarty']->display('page_flickr.txt');
+	$GLOBALS['smarty']->display('page_wikipedia.txt');
 	exit();

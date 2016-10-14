@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div class="row">
-		<h2>Flickr photos of <span id="wof_name">{$wof_name|@escape}</span></h2>
+		<h2>Wikipedia photos of <span id="wof_name">{$wof_name|@escape}</span></h2>
 		<p><a href="{$cfg.abs_root_url}id/{$wof_id}/">Back to photos of {$wof_name|@escape}</a></p>
 	</div>
 	<div class="row headroom">
@@ -12,19 +12,18 @@
 			<input type="hidden" name="method" value="wof.save">
 			<input type="hidden" name="access_token" value="{$site_token|@escape}">
 			<input type="hidden" name="wof_id" value="{$wof_id|@escape}">
-			{if $woe_id}
+			{if $wk_page}
 				<p class="caveat">Click on an image to save it. Those <strong>outlined in red</strong> are already saved.</p>
-				{foreach from=$flickr_photos item=photo}
-					<figure class="wof-photo{if in_array($photo.ext_id,$photos_saved)} wof-photo-saved{/if}" data-type="flickr" data-ext-id="{$photo.id}">
-						<img src="{$photo|@wof_photos_flickr_src|@escape}" alt="">
+				{foreach from=$wikipedia_photos item=photo}
+					<figure class="wof-photo{if in_array($photo.ext_id,$photos_saved)} wof-photo-saved{/if}" data-type="wikipedia" data-ext-id="{$photo.ext_id}">
+						<img src="{$photo.info|@wof_photos_wikipedia_src|@escape}" alt="">
 					</figure>
 				{/foreach}
-				{if !$flickr_photos}
+				{if !$wikipedia_photos}
 					<p>No photos available.</p>
 				{/if}
 			{else}
-				<h3>Flickr photos</h3>
-				<p>This WOF record has no <code>gp:id</code> concordance, so we cannot assign photos from Flickr. 😿</p>
+				<p>This WOF record has no <code>wk:page</code> concordance, so we cannot assign photos from Wikipedia. 😿</p>
 			{/if}
 		</form>
 	</div>
