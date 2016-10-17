@@ -46,6 +46,8 @@
 			$ext_ids[] = $photo['ext_id'];
 		}
 		$GLOBALS['smarty']->assign('photos_saved', $ext_ids);
+	} else {
+		$GLOBALS['smarty']->assign('photos_saved', array());
 	}
 
 	$GLOBALS['smarty']->display('page_flickr.txt');
