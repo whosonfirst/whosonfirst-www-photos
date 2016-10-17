@@ -14,6 +14,10 @@ mapzen.whosonfirst.photos.edit = (function() {
 			$('.wof-save-target img').click(function(e){
 				self.photo_save(e.target);
 			});
+			$('.set-primary').click(function(e) {
+				e.preventDefault();
+				self.set_primary(e.target);
+			});
 		},
 
 		photo_save(el){
@@ -33,6 +37,29 @@ mapzen.whosonfirst.photos.edit = (function() {
 				type: $figure.data('type')
 			};
 			mapzen.whosonfirst.photos.api.api_call("wof.photos_save", data, onsuccess, onerror);
+		},
+
+		set_primary: function(link) {
+
+			var $target = $(link).closest('figure');
+
+			var onsuccess = function() {
+				var $curr = $('#primary-photo-container figure');
+				$curr.addClass('wof-thumb');
+				$('#secondary-photo-container').prepend($curr);
+				$('#primary-photo-container').append($target);
+				$target.removeClass('wof-thumb');
+			};
+
+			var onerror = function() {
+				alert('Oops, something went wrong.');
+			}
+
+			var data = {
+				wof_id: $('#wof_name').data('id'),
+				photo_id: $target.data('id')
+			};
+			mapzen.whosonfirst.photos.api.api_call("wof.photos_set_primary", data, onsuccess, onerror);
 		}
 
 	};

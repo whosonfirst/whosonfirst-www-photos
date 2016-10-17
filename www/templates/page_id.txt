@@ -3,7 +3,7 @@
 
 <div class="container">
 	<div class="row">
-		<h2>Photos of <span id="wof_name">{$wof_name|@escape}</span></h2>
+		<h2>Photos of <span id="wof_name" data-id="{$wof_id|@escape}">{$wof_name|@escape}</span></h2>
 	</div>
 	<h3>Available photo sources</h3>
 	<ul>
@@ -12,15 +12,19 @@
 	</ul>
 	<div id="primary-photo-container" class="row headroom">
 		{if $primary_photo}
-			<img src="{$primary_photo.src|@escape}" alt="" id="primary-photo" class="wof-photo-primary" data-type="{$primary_photo.type|@escape}" data-ext-id="{$primary_photo.ext_id|@escape}">
+			<figure class="wof-photo" data-id="{$primary_photo.id|@escape}" data-type="{$primary_photo.type|@escape}" data-ext-id="{$primary_photo.ext_id|@escape}">
+				<img src="{$primary_photo.src|@escape}" alt="">
+				<a href="#" class="set-primary">Set to primary photo</a>
+			</figure>
 		{else}
 			(No photos saved yet)
 		{/if}
 	</div>
-	<div class="row headroom">
+	<div id="secondary-photo-container" class="row headroom">
 		{foreach from=$secondary_photos item=photo}
-			<figure class="wof-thumb" data-type="{$photo.type|@escape}" data-ext-id="{$photo.ext_id|@escape}">
+			<figure class="wof-photo wof-thumb" data-id="{$photo.id|@escape}" data-type="{$photo.type|@escape}" data-ext-id="{$photo.ext_id|@escape}">
 				<img src="{$photo.src|@escape}" alt="">
+				<a href="#" class="set-primary">Set to primary photo</a>
 			</figure>
 		{/foreach}
 	</div>

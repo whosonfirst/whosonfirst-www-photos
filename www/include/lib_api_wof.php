@@ -35,4 +35,18 @@
 
 	########################################################################
 
+	function api_wof_photos_set_primary(){
+
+		$user = $GLOBALS['cfg']['user'];
+		if (! $user) {
+			api_output_error(400, 'You must be logged in save a photo.');
+		}
+
+		$wof_id = post_int32('wof_id');
+		$photo_id = post_int32('photo_id');
+		$rsp = wof_photos_set_primary($wof_id, $photo_id);
+
+		api_output_ok($rsp);
+	}
+
 	# the end

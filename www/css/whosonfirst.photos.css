@@ -32,7 +32,6 @@
 	display: inline-block;
 	margin: 10px 10px 10px 0;
 	width: calc(33% - 20px);
-	background: #ccc;
 }
 
 .wof-thumb:nth-child(3n) {
@@ -42,8 +41,17 @@
 .wof-thumb img {
 	width: 100%;
 	height: auto;
+	background: #ccc;
 }
 
 .wof-saved {
 	outline: 5px solid #d4645c;
+}
+
+.set-primary {
+	display: none;
+}
+
+.wof-thumb .set-primary {
+	display: inline;
 }

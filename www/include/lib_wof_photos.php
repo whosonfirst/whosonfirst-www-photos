@@ -187,4 +187,45 @@
 		return "$base_url/{$type}/$filename";
 	}
 
+	########################################################################
+
+	function wof_photos_set_primary($wof_id, $photo_id){
+		$esc_wof_id = intval($wof_id);
+		$esc_photo_id = intval($photo_id);
+		$rsp = db_fetch("
+			SELECT *
+			FROM photos
+			WHERE wof_id = $esc_wof_id
+			ORDER BY sort
+		");
+		if (! $rsp['ok']){
+			return $rsp;
+		}
+
+		$sort = 1;
+		foreach ($rsp['rows'] as $photo){
+			if ($photo['id'] == $photo_id){
+				$rsp = db_update('photos', array(
+					'sort' => 0
+				), "id = $esc_photo_id");
+				if (! $rsp['ok']){
+					return $rsp;
+				}
+			} else {
+				$esc_id = intval($photo['id']);
+				$rsp = db_update('photos', array(
+					'sort' => $sort
+				), "id = $esc_id");
+				if (! $rsp['ok']){
+					return $rsp;
+				}
+				$sort++;
+			}
+		}
+		return array(
+			'rsp' => $rsp,
+			'ok' => 1
+		);
+	}
+
 	# the end

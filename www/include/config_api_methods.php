@@ -31,6 +31,19 @@
 			)
 		),
 
+		"wof.photos_set_primary" => array (
+			"description" => "Sets the primary photo for a WOF record.",
+			"documented" => 1,
+			"enabled" => 1,
+			"library" => "api_wof",
+			"requires_crumb" => 0,
+			"request_method" => "POST",
+			"parameters" => array(
+				array("name" => "wof_id", "description" => "The WOF ID.", "documented" => 1, "required" => 1),
+				array("name" => "photo_id", "description" => "The photo ID.", "documented" => 1, "required" => 1)
+			)
+		),
+
 		"api.spec.methods" => array (
 			"description" => "Return the list of available API response methods.",
 			"documented" => 1,
